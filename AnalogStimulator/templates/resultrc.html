@@ -1,0 +1,70 @@
+{% load static %}
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <title>RC Circuit</title>
+  </head>
+  <body>
+    <nav class="navbar  navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">ANALOG CIRCUIT SIMULATOR</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link" href="#">About</a>
+              
+              
+            </div>
+          </div>
+        </div>
+      </nav>
+
+
+
+<br><br>
+<p class="h3 text-center">R-C Circuit</p>
+<br>
+
+<div class= "container-fluid ">
+    <div class="row">
+        <div class="col-sm-6 mx-auto">
+            <img src="data:image/png;base64,{{graphic|safe}}">
+        </div>
+        <div class="col-sm-6">
+          <img src="data:image/png;base64,{{graphic1|safe}}">
+    </div>
+    </div>
+</div>
+  <br>
+<div class="container text-center">
+    <form action="{% url 'index' %}" method="post">{% csrf_token %}
+        <button type="submit" name="index" class="btn btn-primary btn-block float-center"value="index">Back to HomePage</button>
+     </form>
+</div>
+<br>  
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

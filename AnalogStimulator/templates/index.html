@@ -1,0 +1,244 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Interactive Simulation Platform</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="bootstrap-4.5.3-dist/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="bootstrap-4.5.3-dist/css/bootstrap.min.css">
+  
+  <style>
+      body {
+    line-height: 1;
+    margin: 0;
+  }
+  
+  .main {
+    width: 100%;
+    padding-top: 2.5%;
+    padding-bottom: 3%;
+  }
+  .row {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    margin: auto;
+    padding: 0ch;
+    align-items: center;
+  }
+  
+  .row::after {
+    display: table;
+    clear: both;
+    content: "";
+  }
+  div.box {
+    text-align: center;
+   margin: auto;
+   margin-top: 7%;
+    padding: 25px 17px 25px 17px;
+    border-radius: 7px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.15),
+      0 2px 3px 0 rgba(0,0,0,.1);
+      width: 75%;
+      height: 275px;     
+  }
+
+div.col-md-3.col-sm-12 {
+  padding: 0% 1% 0% 4.1%;
+}
+
+.card .card-body {
+  padding: 0 0 1.75rem;
+ 
+}
+
+a {
+    font-size: 37px;
+    text-decoration: none;
+    display: block;
+    text-decoration: none;
+    min-height: 16px;
+    text-align: center;
+    padding: 14px;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 0%;
+}
+
+  a:hover {
+    background-color: #0080ff;
+    color: #fff;
+  }
+
+* {
+    box-sizing: border-box;
+  }
+
+  header{
+    display: block;
+  }
+
+  header{
+    background-color: black;
+    text-decoration: none;
+    padding: 17.7px 0px 15.5px 20px;
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 4;
+    overflow: hidden;
+}
+h1{
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+    font-family: serif;
+}
+.col-md-3 .col-sm-12 {
+  margin: 5%;
+}
+
+/***********Circuits****************/
+
+img {
+    height: 135px;
+    width: 155px ;
+}
+
+.rc img {
+    height: 175px;
+    width: 225px;
+    margin: 0%;
+}
+.rc a, .rl a, .rlc a{
+  padding: 0;
+}
+
+.rl img {
+    margin: 2.5% 0%;
+    height: 155px;
+}
+
+  h1 {
+    font-size: 3em;
+    text-align: center;
+    margin-bottom: 0%;
+  }
+/*************************************/
+/***********footer********************/
+footer{
+    background-color: #666;
+    margin: 0%;
+  }
+
+  footer div {
+    padding: 1.9% 1%;
+  }
+  
+  footer div h1 {
+    color: #fff;
+    font-size: 27px;
+  }
+
+  footer h1 {
+      padding: 1%;
+      margin: 0%;
+  }
+  
+
+  footer.members ul {
+    list-style: none;
+    text-align:center;
+    padding-left: 0;
+    color: #fff;
+    font-size: 22px;
+    line-height: 1.5;
+    padding-bottom: 0;
+  }
+
+  div.sir {
+    margin: auto ;
+  
+  }
+  div.student{
+    margin:auto;
+  }
+  
+  
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="row">
+      <div class="col-lg-4 col-sm-12">
+        <h1>Select a Circuit</h1>
+      </div>
+  </header>
+  <div class="main">
+    <div class="row">
+      <div class="col-md-3 col-sm-12">
+        <div class="card box" style="width: 18rem;">
+          <img class="card-img-top" src="{% static 'css/buck.jpg' %}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"><a href="{% url 'buck' %}" target="_blank">Buck Converter</a></h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-12">
+        <div class="card box rlc" style="width: 19rem;">
+          <img class="card-img-top" src="{% static 'css/rlc.jpg' %}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"><a href="#" target="_blank">R-L-C circuit</a></h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-12">
+        <div class="card box rc" style="width: 18rem;">
+          <img class="card-img-top" src="{% static 'css/rc-circuit.jpg' %}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"><a href="{% url 'rc' %}" >R-C Circuit</a></h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-12">
+        <div class="card box rl" box style="width: 18rem;">
+          <img class="card-img-top" src="{% static 'css/rl-circuit-18-2-14-2.png' %}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"><a href="{% url 'rl' %}" >R-L Circuit</a></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <footer class="members">
+      <div class="row">
+        <div class="col-md-6 col-sm-12 sir">
+          <h1>Made By:</h1>
+          
+        </div>
+        <div class="col-md-6 col-sm-12 student">
+          <h1>Aditi Singhal</h1>
+          <h1>Ila Dwivedi </h1>
+          <h1>Khushi</h1>
+          <h1>Purvi Shrivastava </h1>
+        </div>
+    </footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+  integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+  integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<!--  Always Download latest version of Boostrap and add here-->
+<script src="bootstrap-4.5.3-dist/js/bootstrap.min.js"></script>
+
+</html>
