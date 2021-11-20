@@ -25,5 +25,7 @@ urlpatterns = [
     path('rc/', views.rc, name="rc"),
     path('rl/', views.rl, name="rl"),
     path('buck/',views.buck, name="buck"),
-    path('resultbuck/',views.resultbuck, name="resultbuck")
+    path('resultbuck/',views.resultbuck, name="resultbuck"),
+    path('boost/',views.boost, name="boost"),
+    path('resultboost/',views.resultboost, name="resultboost")
 ]

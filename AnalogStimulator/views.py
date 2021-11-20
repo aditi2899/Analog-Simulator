@@ -20,6 +20,9 @@ def rc(request):
 def buck(request):
     return render(request, 'buck.html') 
 
+def boost(request):
+    return render(request, 'boost.html') 
+
 def result(request):
    
 
@@ -130,120 +133,87 @@ def vol_time2(vol, res, cap):
     #print(graphic1)
     return graphic1
 
-#1st approach 
-# def custom_func(x_ele,Vin,L,Imax,Ton,Toff ):
-#     T=Ton+Toff
-#     DutyCycle= Ton/(Ton+Toff)
-#     z=[]
-    
-#     Vout=DutyCycle*Vin
-#     Imin=Imax-DutyCycle*T*((Vin-Vout)/L)
-#     for x in x_ele:
-#         y=x%T
-        
-#         if(y<Ton):
-#             z.append((((Vin-Vout)/L)*y)+Imin)
-#         else:
-#            z.append(((-Vout/L)*y)+Imax+((Vout/L)*DutyCycle*T))
-#     return z
-
-# def resultbuck(request):
-       
-#     Vin = float(request.POST['voltage'])
-#     # R = float(request.POST['Resistance'])
-#     # C = float(request.POST['Capacitance'])
-#     L = float(request.POST['Inductance'])
-#     #Imin = float(request.POST['current_min'])
-#     Imax = float(request.POST['current_max'])
-#     Ton = float(request.POST['t_on'])
-#     Toff = float(request.POST['t_off'])
-
-    
-
-#     x=np.linspace(0,40,5000)
-#     #y=np.exp((-1*x)/(res*cap))
-#     y=custom_func(x,Vin,L,Imax,Ton,Toff)
-#     plot(x,y)
-
-#     xlabel('Time')
-#     ylabel('Inductor Current')
-#     title('Time vs Current')
-#     #ylim(Imax-20,Imax+1)
-#     grid(True)
-#     # Store image in a string buffer
-#     buffer = BytesIO()
-#     canvas = pylab.get_current_fig_manager().canvas
-#     canvas.draw()
-#     graphIMG = PIL.Image.frombytes('RGB', canvas.get_width_height(), canvas.tostring_rgb())
-#     graphIMG.save(buffer, "PNG")
-#     pylab.close()
-#     graphic = buffer.getvalue()
-#     graphic = base64.b64encode(graphic)
-#     buffer.close()
-    
-
-#     return render(request, 'resultbuck.html',{'graphic': str(graphic)[2:-1]})
-
-#2nd approach
-# def model(volt,t,Ton,Toff,R,L,C,Vin):
-#     T=Ton+Toff
-#     volt1=volt[0]#Vo
-#     volt2=volt[1]#dVo
-#     dvolt1_dt=volt2
-#     y=t%T
-#     if(y<Ton):
-#         dvolt2_dt=((Vin/L) - (volt1/L) - (volt2/R))/C
-#         return [dvolt1_dt,dvolt2_dt]
-#     else:
-#         dvolt2_dt=(-(volt1/L) - (volt2/R))/C
-#         return [dvolt1_dt,dvolt2_dt]
-
-#     #return [dvolt1_dt,dvolt2_dt]
-
-
-# def resultbuck(request):
-       
-#     Vin = float(request.POST['voltage'])
-#     R = float(request.POST['Resistance'])
-#     C = float(request.POST['Capacitance'])
-#     L = float(request.POST['Inductance'])
-#     on = float(request.POST['t_on'])
-#     off = float(request.POST['t_off'])
-
-#     L=L*.001
-#     C=C*.000001
-#     Ton=on*.001
-#     Toff=off*.001
-
-#     t=np.linspace(0,.01,50000)
-#     volt0 = [0,0] #initial conditions
-#     y=odeint(model,volt0,t,args=(Ton,Toff,R,L,C,Vin))
-
-    
-#     #y1=odeint(y[:,0],t)
-#     plot(t,y[:,0])
-
-#     xlabel('Time')
-#     ylabel('Output Voltage')
-#     title('Time vs Voltage')
-#     grid(True)
-#     # Store image in a string buffer
-#     buffer = BytesIO()
-#     canvas = pylab.get_current_fig_manager().canvas
-#     canvas.draw()
-#     graphIMG = PIL.Image.frombytes('RGB', canvas.get_width_height(), canvas.tostring_rgb())
-#     graphIMG.save(buffer, "PNG")
-#     pylab.close()
-#     graphic = buffer.getvalue()
-#     graphic = base64.b64encode(graphic)
-#     buffer.close()
-    
-
-#     return render(request, 'resultbuck.html',{'graphic': str(graphic)[2:-1]})
 
 #3rd approach
 def resultbuck(request):
        
+    Vin = float(request.POST['voltage'])
+    R = float(request.POST['Resistance'])
+    C = float(request.POST['Capacitance'])
+    L = float(request.POST['Inductance'])
+    on = float(request.POST['t_on'])
+    off = float(request.POST['t_off'])
+
+    L=L*.001
+    C=C*.000001
+    Ton=on*.0001
+    Toff=off*.0001
+
+
+    time=[0]#np.arrange(0,.01,.00001)
+    Vc=[5]
+    Il=[0.5]
+    io=[0.5]
+    ic=[0.0]
+    dt=.000001
+    x=np.arange(.000001,.001,.000001)
+    for t in x:
+        time.append(t)
+        y=t%(Ton+Toff)
+        if(y<=Ton):
+            di=( (Vin-Vc[-1]) *dt )/L
+        else:
+            di=((-Vc[-1])*dt)/L
+            
+        newI=Il[-1]+di
+        Il.append(newI)
+        newio=Vc[-1]/R
+        io.append(newio)
+        newic=Il[-1]-io[-1]
+        ic.append(newic)
+        dVc=(ic[-1]*dt)/C
+        newV=Vc[-1]+dVc
+        Vc.append(newV)
+
+
+    plot(time,Vc)
+
+    xlabel('Time')
+    ylabel('Output Voltage')
+    title('Time vs Voltage')
+    grid(True)
+    # Store image in a string buffer
+    buffer = BytesIO()
+    canvas = pylab.get_current_fig_manager().canvas
+    canvas.draw()
+    graphIMG = PIL.Image.frombytes('RGB', canvas.get_width_height(), canvas.tostring_rgb())
+    graphIMG.save(buffer, "PNG")
+    pylab.close()
+    graphic = buffer.getvalue()
+    graphic = base64.b64encode(graphic)
+    buffer.close()
+    
+
+    plot(time,Il)
+
+    xlabel('Time')
+    ylabel('Inductor Current')
+    title('Time vs Current')
+    grid(True)
+    # Store image in a string buffer
+    buffer = BytesIO()
+    canvas = pylab.get_current_fig_manager().canvas
+    canvas.draw()
+    graphIMG = PIL.Image.frombytes('RGB', canvas.get_width_height(), canvas.tostring_rgb())
+    graphIMG.save(buffer, "PNG")
+    pylab.close()
+    graphic1 = buffer.getvalue()
+    graphic1 = base64.b64encode(graphic1)
+    buffer.close()
+
+    return render(request, 'resultbuck.html',{'graphic': str(graphic)[2:-1], 'graphic1': str(graphic1)[2:-1]})
+
+def resultboost(request):
     Vin = float(request.POST['voltage'])
     R = float(request.POST['Resistance'])
     C = float(request.POST['Capacitance'])
@@ -265,21 +235,17 @@ def resultbuck(request):
         time.append(t)
         y=t%(Ton+Toff)
         if(y<=Ton):
-            di=( (Vin-Vc[-1]) *dt )/L
+            di=( Vin *dt )/L
             newI=Il[-1]+di
             Il.append(newI)
-            io=Vc[-1]/R
-            ic=Il[-1]-io
-            dVc=(ic*dt)/C
+            dVc=(-Vc[-1]*dt)/(R*C)
             newV=Vc[-1]+dVc
             Vc.append(newV)
         else:
-            di=((-Vc[-1])*dt)/L
+            di=((Vin-Vc[-1])*dt)/L
             newI=Il[-1]+di
             Il.append(newI)
-            io=Vc[-1]/R
-            ic=Il[-1]-io
-            dVc=(ic*dt)/C
+            dVc=((newI-(Vc[-1]/R))*dt)/C
             newV=Vc[-1]+dVc
             Vc.append(newV)
     
@@ -301,4 +267,4 @@ def resultbuck(request):
     buffer.close()
     
 
-    return render(request, 'resultbuck.html',{'graphic': str(graphic)[2:-1]})
+    return render(request, 'resultboost.html',{'graphic': str(graphic)[2:-1]})
