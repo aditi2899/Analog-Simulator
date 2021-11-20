@@ -146,8 +146,8 @@ def resultbuck(request):
 
     L=L*.001
     C=C*.000001
-    Ton=on*.0001
-    Toff=off*.0001
+    Ton=on*.001
+    Toff=off*.001
 
 
     time=[0]#np.arrange(0,.01,.00001)

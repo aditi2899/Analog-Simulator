@@ -48,51 +48,33 @@
       <form method="post" action="{% url 'resultbuck' %}">  {% csrf_token %}
         <div class="form-group">
           <label for="voltage">Voltage</label>
-          <input type="number" class="form-control" id="voltage" name="voltage" aria-describedby="volatge" placeholder="Enter voltage">
+          <input type="number" class="form-control" id="voltage" name="voltage" aria-describedby="volatge" placeholder="Enter voltage" step=".01">
         </div>
 
         <div class="form-group">
             <label for="Resistance">Resistance(ohm)</label>
-            <input type="number" class="form-control" id="Resistance" name="Resistance" placeholder="Enter Resistance">
+            <input type="number" class="form-control" id="Resistance" name="Resistance" placeholder="Enter Resistance" step=".01">
         </div>
 
         <div class="form-group">
             <label for="Capacitance">Capacitance(in micro F)</label>
-            <input type="number" class="form-control" id="Capacitance" name="Capacitance" placeholder="Enter Capacitance">
+            <input type="number" class="form-control" id="Capacitance" name="Capacitance" placeholder="Enter Capacitance" step=".01">
         </div>
 
         <div class="form-group">
             <label for="Inductance">Inductance(in milli H)</label>
-            <input type="number" class="form-control" id="Inductance" name="Inductance" placeholder="Enter Inductance">
+            <input type="number" class="form-control" id="Inductance" name="Inductance" placeholder="Enter Inductance" step=".01">
           </div>
 
-        <!-- <div class="form-group">
-            <label for="current_min">Imin</label>
-            <input type="number" class="form-control" id="current_min" name="current_min" aria-describedby="current_min" placeholder="Enter minimum current">
-        </div> -->
-
-        <!-- <div class="form-group">
-            <label for="current_max">Imax</label>
-            <input type="number" class="form-control" id="current_max" name="current_max" aria-describedby="current_max" placeholder="Enter maximum current">
-        </div> -->
-        
         <div class="form-group">
             <label for="t_on">T_on(in milli sec)</label>
-            <input type="number" class="form-control" id="t_on" name="t_on" placeholder="Enter on time period">
+            <input type="number" class="form-control" id="t_on" name="t_on" placeholder="Enter on time period" step=".01">
         </div>
 
         <div class="form-group">
             <label for="t_off">T_off(in milli sec)</label>
-            <input type="number" class="form-control" id="t_off" name="t_off" placeholder="Enter off time period">
+            <input type="number" class="form-control" id="t_off" name="t_off" placeholder="Enter off time period" step=".01">
         </div>
-        <!-- <div class="form-group">
-          <label for="Efficiency">Efficiency</label>
-          <input type="number" class="form-control" id="Efficiency" name="Efficiency" placeholder="Enter Efficiency">
-        </div> -->
-        <!-- <div class="form-group">
-            <label for="Duty cycle">Duty cycle</label>
-            <input type="number" class="form-control" id="Duty cycle" name="Duty cycle" placeholder="Enter Duty cycle">
-          </div> -->
 
        <br>
         <button type="submit" class="btn btn-primary">Submit</button><br>
