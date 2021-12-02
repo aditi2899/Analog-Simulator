@@ -25,4 +25,4 @@ simulation platform currently available requires a lot of time and space to run.
 lack of facilities many people don't have the access to resources that could run heavy
 simulation platforms like MATLAB. So, we decided to develop an interactive simulation
 platform that could work on basic Android mobile phones.
-CHAPTER 
+
